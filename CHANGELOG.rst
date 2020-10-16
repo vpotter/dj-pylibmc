@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.6.2 - 2020-10-16
+------------------
+- Supports Django 1.7 through 3.1
+- Supports Python 2.7 through 3.8
+
 0.6.1 - 2015-12-28
 ------------------
 - Supports Django 1.7 through 1.11
