@@ -1,4 +1,4 @@
-"""django-pylibmc packaging."""
+"""dj-pylibmc packaging."""
 from __future__ import unicode_literals
 from codecs import open
 import os
@@ -7,7 +7,7 @@ import sys
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
-import django_pylibmc
+import dj_pylibmc
 
 
 class Tox(TestCommand):
@@ -54,15 +54,15 @@ _(Older changes can be found in the full documentation)._
 
 
 setup(
-    name='django-pylibmc',
-    version=django_pylibmc.__version__,
+    name='dj-pylibmc',
+    version=dj_pylibmc.__version__,
     description='Django cache backend using pylibmc',
-    long_description=get_long_description('django-pylibmc'),
+    long_description=get_long_description('dj-pylibmc'),
     author='Jeff Balogh',
-    author_email='jbalogh@mozilla.com',
-    url='https://github.com/django-pylibmc/django-pylibmc',
+    author_email='entwicklung@regiohelden.de',
+    url='https://github.com/RegioHelden/dj-pylibmc',
     license='BSD',
-    packages=['django_pylibmc'],
+    packages=['dj_pylibmc'],
     include_package_data=True,
     zip_safe=False,
     install_requires=['pylibmc>=1.4.1'],

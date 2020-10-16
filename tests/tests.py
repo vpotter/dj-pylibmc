@@ -319,7 +319,7 @@ class PylibmcCacheTests(TestCase):
         forever.
 
         In Django, it results in a value that is not cached.
-        TODO: Re-sync this with the upstream test once django-pylibmc
+        TODO: Re-sync this with the upstream test once dj-pylibmc
         follows the Django behaviour:
         https://github.com/django-pylibmc/django-pylibmc/issues/35
         """

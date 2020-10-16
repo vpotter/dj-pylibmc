@@ -1,6 +1,6 @@
 .tox
 *.pyc
-django_pylibmc.egg-info
+dj_pylibmc.egg-info
 pylibmc
 dist/*
 build/*

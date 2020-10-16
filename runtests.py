@@ -17,7 +17,7 @@ if __name__ == "__main__":
     django.setup()
 
     # Log memcache errors to console
-    from django_pylibmc.memcached import log
+    from dj_pylibmc.memcached import log
     handler = logging.StreamHandler()
     handler.setLevel(logging.DEBUG)
     log.addHandler(handler)

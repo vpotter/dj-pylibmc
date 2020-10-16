@@ -1,1 +1,1 @@
-# Tests for django-pylibmc
+# Tests for dj-pylibmc

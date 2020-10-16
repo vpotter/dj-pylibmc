@@ -12,16 +12,16 @@ INSTALLED_APPS = (
 
 CACHES = {
     'default': {
-        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+        'BACKEND': 'dj_pylibmc.memcached.PyLibMCCache',
         'LOCATION': '127.0.0.1:11211',
     },
     'binary': {
-        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+        'BACKEND': 'dj_pylibmc.memcached.PyLibMCCache',
         'LOCATION': '127.0.0.1:11211',
         'BINARY': True,
     },
     'with_options': {
-        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+        'BACKEND': 'dj_pylibmc.memcached.PyLibMCCache',
         'LOCATION': '127.0.0.1:11211',
         'OPTIONS': {
             'tcp_nodelay': True,

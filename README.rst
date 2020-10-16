@@ -2,13 +2,13 @@
 pylibmc cache backend for Django
 ================================
 
-.. image:: https://img.shields.io/pypi/v/django-pylibmc.svg
+.. image:: https://img.shields.io/pypi/v/dj-pylibmc.svg
     :alt: The PyPI package
-    :target: https://pypi.python.org/pypi/django-pylibmc
+    :target: https://pypi.python.org/pypi/dj-pylibmc
 
-.. image:: https://img.shields.io/travis/django-pylibmc/django-pylibmc/master.svg
+.. image:: https://img.shields.io/travis/RegioHelden/dj-pylibmc.svg
     :alt: TravisCI Build Status
-    :target: https://travis-ci.org/django-pylibmc/django-pylibmc
+    :target: https://travis-ci.org/RegioHelden/dj-pylibmc
 
 .. Omit badges from docs
 
@@ -16,12 +16,15 @@ This package provides a memcached cache backend for Django using
 `pylibmc <http://github.com/lericson/pylibmc>`_.  You want to use pylibmc because
 it's fast.
 
-Do you need django-pylibmc?
+This is a fork of the `django-pylibmc <https://github.com/jbalogh/django-pylibmc>`_
+package.
+
+Do you need dj-pylibmc?
 ---------------------------
 
 Django now has a built-in pylibmc backend, and as of Django 1.11 also supports
 the ``binary``, ``username`` and ``password`` options natively. As such, in most
-cases the built-in backend should be used instead of django-pylibmc, since it
+cases the built-in backend should be used instead of dj-pylibmc, since it
 will be more actively maintained.
 
 To use Django's own backend, configure ``CACHES`` like so::
@@ -37,7 +40,7 @@ See the
 `Django documentation <https://docs.djangoproject.com/en/1.11/topics/cache/#memcached>`_
 for details about using this cache backend.
 
-Reasons to use django-pylibmc instead, are:
+Reasons to use dj-pylibmc instead, are:
 
 - You would like to use pylibmc's compression feature
 - You would rather pylibmc connection/server exceptions be caught/logged and not raised
@@ -52,19 +55,19 @@ Reasons to use django-pylibmc instead, are:
 Requirements
 ------------
 
-django-pylibmc requires pylibmc 1.4.1 or above. It supports Django 1.8 through
+dj-pylibmc requires pylibmc 1.4.1 or above. It supports Django 1.8 through
 3.1, and Python versions 2.7, 3.4, 3.5, 3.6, 3.7 and 3.8
 
 Installation
 ------------
 
-Get it from `pypi <http://pypi.python.org/pypi/django-pylibmc>`_::
+Get it from `pypi <http://pypi.python.org/pypi/dj-pylibmc>`_::
 
-    pip install django-pylibmc
+    pip install dj-pylibmc
 
-or `github <http://github.com/django-pylibmc/django-pylibmc>`_::
+or `github <http://github.com/RegioHelden/dj-pylibmc>`_::
 
-    pip install -e git://github.com/django-pylibmc/django-pylibmc.git#egg=django-pylibmc
+    pip install -e git://github.com/RegioHelden/dj-pylibmc.git#egg=dj-pylibmc
 
 
 Usage
@@ -74,7 +77,7 @@ Your cache backend should look something like this::
 
     CACHES = {
         'default': {
-            'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+            'BACKEND': 'dj_pylibmc.memcached.PyLibMCCache',
             'LOCATION': 'localhost:11211',
             'TIMEOUT': 500,
             'BINARY': True,
@@ -136,11 +139,11 @@ support for memcache-style Unix timestamps as well.
 In the distant past (Django 1.3?), a timeout of 0 was converted to the default
 timeout.
 
-The current django-pylibmc behaviour is to pass 0 to the backend, which should
+The current dj-pylibmc behaviour is to pass 0 to the backend, which should
 be interpreted as "never expire". Omiting the timeout will get the Django
 default.
 
-In the future, django-pylibmc will adopt the latest Django behaviour.
+In the future, dj-pylibmc will adopt the latest Django behaviour.
 The safest solution for your own code is to omit the timeout parameter (and
 get the default timeout), or set it to a timeout in seconds (less than 30
 days). This way, your code will work when the Django behaviour is adopted.

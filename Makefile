@@ -66,13 +66,13 @@ coverage: coverage-console
 .PHONY: release
 release: sdist
 	twine upload dist/*
-	python -m webbrowser -n https://pypi.python.org/pypi/django-pylibmc
+	python -m webbrowser -n https://pypi.python.org/pypi/dj-pylibmc
 
 .PHONY: test-release
 # Add [test] section to ~/.pypirc, https://test.pypi.org/legacy/
 test-release: sdist
 	twine upload --repository test dist/*
-	python -m webbrowser -n https://testpypi.python.org/pypi/django-pylibmc
+	python -m webbrowser -n https://testpypi.python.org/pypi/dj-pylibmc
 
 .PHONY: sdist
 sdist: clean

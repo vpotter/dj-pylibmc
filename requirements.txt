@@ -1,5 +1,5 @@
 #
-# Requirements for running django-pylibmc tests
+# Requirements for running dj-pylibmc tests
 #
 
 # Django
