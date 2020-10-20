@@ -11,6 +11,7 @@ from django.core import signals
 from django.core.cache import caches
 from django.db import close_old_connections
 from django.test import TestCase
+from pylibmc import Error as MemcachedError
 
 from .models import Poll, expensive_calculation
 
@@ -499,6 +500,20 @@ class PylibmcCacheTests(TestCase):
         self.assertEqual(self.cache.get_or_set('brian', 42, version=1), 42)
         self.assertEqual(self.cache.get_or_set('brian', 1979, version=2), 1979)
         self.assertIsNone(self.cache.get('brian', version=3))
+
+    @mock.patch('dj_pylibmc.memcached.RETRY_ON_BROKEN_CONNECTION', True)
+    @mock.patch('pylibmc.Client.get')
+    def test_get_retry_on_broken_connection(self, mock_get):
+        from django.core.cache import _create_cache
+
+        cache_backend = _create_cache(self.cache_name)
+
+        # raise connection error (code 3)
+        mock_get.side_effect = MemcachedError()
+        mock_get.side_effect.retcode = 3
+
+        cache_backend.get('test')
+        self.assertEqual(mock_get.call_count, 2)
 
     # #### From Django's BaseMemcachedTests ####
 
