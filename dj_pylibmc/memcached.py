@@ -48,7 +48,7 @@ COMPRESS_KWARGS = {
 }
 
 
-RETRY_ON_BROKEN_CONNECTION = getattr(settings, 'DJPYLIBMC_RETRY_ON_BROKEN_CONNECTION', False)  # disabled
+RETRY_ON_BROKEN_CONNECTION = getattr(settings, 'DJPYLIBMC_RETRY_ON_BROKEN_CONNECTION', True)  # disabled
 
 
 def retry_on_broken_connection(func):

@@ -111,8 +111,9 @@ module. Please note that pylibmc changed the default from ``1`` (``Z_BEST_SPEED`
 to ``-1`` (``Z_DEFAULT_COMPRESSION``) in 1.3.0.
 
 Since 0.6.2 connections are long-living and not closed after each request. It could cause unwanted ``ConnectionErrors``
-being raised by libmemcached when connection is broken. ``DJPYLIBMC_RETRY_ON_BROKEN_CONNECTION`` Django setting
-tells dj-pylibmc to make one more attempt when a request to memcached fails with ConnectionError.
+being raised by libmemcached when connection is broken. dj-pylibmc will make one more attempt
+when a request to memcached fails with ConnectionError. If this behavior doesn't fit your needs, it can be disabled
+by setting ``DJPYLIBMC_RETRY_ON_BROKEN_CONNECTION`` Django setting to False.
 
 
 Configuration with Environment Variables
