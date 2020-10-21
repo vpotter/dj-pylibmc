@@ -48,6 +48,30 @@ COMPRESS_KWARGS = {
 }
 
 
+RETRY_ON_BROKEN_CONNECTION = getattr(settings, 'DJPYLIBMC_RETRY_ON_BROKEN_CONNECTION', False)  # disabled
+
+
+def retry_on_broken_connection(func):
+    """
+    The only goal of this decorator is to add retry functionality to pylibmc.Client's methods
+
+    It's necessary because sometimes long-living connection can be broken
+    which leads to a `miss`, though memcache server can be available again at the moment.
+    """
+    def wrapper(*args, **kwargs):
+        try:
+            result = func(*args, **kwargs)
+        except MemcachedError as e:
+            # libmemcached error code is stored in retcode attribute
+            # 3 - ConnectionError
+            if e.retcode == 3:
+                result = func(*args, **kwargs)
+            else:
+                raise
+        return result
+    return wrapper
+
+
 class PyLibMCCache(BaseMemcachedCache):
 
     def __init__(self, server, params, username=None, password=None):
@@ -80,6 +104,23 @@ class PyLibMCCache(BaseMemcachedCache):
             client.behaviors = self._options
 
         self._local.client = client
+
+        if RETRY_ON_BROKEN_CONNECTION:
+            methods_with_retry = [
+                'add',
+                'add_multi',
+                'get',
+                'get_multi',
+                'set',
+                'set_multi',
+                'delete',
+                'delete_multi',
+                'incr',
+                'incr_multi',
+                'decr',
+            ]
+            for method_name in methods_with_retry:
+                setattr(client, method_name, retry_on_broken_connection(getattr(client, method_name)))
 
         return client
 
