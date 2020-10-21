@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.6.3 - 2020-10-21
+------------------
+- Makes retry on ConnectionError
+- Drops support of old Python and Django version
+- Supports Django 2.2 through 3.1
+- Supports Python 3.5 through 3.8
+
 0.6.2 - 2020-10-16
 ------------------
 - Supports Django 1.7 through 3.1
