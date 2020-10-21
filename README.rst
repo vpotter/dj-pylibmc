@@ -45,18 +45,12 @@ Reasons to use dj-pylibmc instead, are:
 - You would like to use pylibmc's compression feature
 - You would rather pylibmc connection/server exceptions be caught/logged and not raised
   (though this may be `added upstream <https://code.djangoproject.com/ticket/28342>`_ soon).
-- You're using Django <1.11 and need to:
-
-  - use the binary protocol.
-  - use a username and password to access the memcached server (such as
-    with `Memcachier on Heroku <https://devcenter.heroku.com/articles/memcachier#django>`_).
-
 
 Requirements
 ------------
 
-dj-pylibmc requires pylibmc 1.4.1 or above. It supports Django 1.8 through
-3.1, and Python versions 2.7, 3.4, 3.5, 3.6, 3.7 and 3.8
+dj-pylibmc requires pylibmc 1.4.1 or above. It supports Django 2.2 through
+3.1, and Python versions >=3.5, <3.9
 
 Installation
 ------------

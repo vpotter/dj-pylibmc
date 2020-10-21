@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import sys
 import time
-from unittest import skipIf
+import pickle
+from unittest import mock
 
-import django
 from django.core import signals
 from django.core.cache import caches
 from django.db import close_old_connections
@@ -14,20 +13,6 @@ from django.test import TestCase
 from pylibmc import Error as MemcachedError
 
 from .models import Poll, expensive_calculation
-
-try:
-    from unittest import mock
-except ImportError:
-    # Python 2
-    import mock
-
-try:    # Use the same idiom as in cache backends
-    from django.utils.six.moves import cPickle as pickle
-except ImportError:
-    import pickle
-
-
-PY3 = sys.version_info[0] == 3
 
 
 # functions/classes for complex data type tests
@@ -461,15 +446,12 @@ class PylibmcCacheTests(TestCase):
         with self.assertRaises(pickle.PickleError):
             self.cache.set('unpicklable', Unpicklable())
 
-    @skipIf(django.VERSION < (1, 11),
-            'get_or_set with `None` not supported (Django ticket #26792)')
     def test_get_or_set(self):
         self.assertIsNone(self.cache.get('projector'))
         self.assertEqual(self.cache.get_or_set('projector', 42), 42)
         self.assertEqual(self.cache.get('projector'), 42)
         self.assertEqual(self.cache.get_or_set('null', None), None)
 
-    @skipIf(django.VERSION < (1, 9), 'get_or_set not supported')
     def test_get_or_set_callable(self):
         def my_callable():
             return 'value'
@@ -477,20 +459,13 @@ class PylibmcCacheTests(TestCase):
         self.assertEqual(self.cache.get_or_set('mykey', my_callable), 'value')
         self.assertEqual(self.cache.get_or_set('mykey', my_callable()), 'value')
 
-    @skipIf(django.VERSION < (1, 9), 'get_or_set not supported')
     def test_get_or_set_callable_returning_none(self):
         self.assertIsNone(self.cache.get_or_set('mykey', lambda: None))
         # Previous get_or_set() doesn't store None in the cache.
         self.assertEqual(self.cache.get('mykey', 'default'), 'default')
 
-    @skipIf(django.VERSION < (1, 11),
-            'get_or_set with `None` not supported (Django ticket #26792)')
     def test_get_or_set_version(self):
-        msg = (
-            "get_or_set() missing 1 required positional argument: 'default'"
-            if PY3
-            else 'get_or_set() takes at least 3 arguments'
-        )
+        msg = "get_or_set() missing 1 required positional argument: 'default'"
         self.cache.get_or_set('brian', 1979, version=2)
         with self.assertRaisesMessage(TypeError, msg):
             self.cache.get_or_set('brian')
