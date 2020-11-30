@@ -43,6 +43,7 @@ clean-test:
 .PHONY: lint
 lint:
 	flake8 .
+	black --check .
 
 .PHONY: test
 test:

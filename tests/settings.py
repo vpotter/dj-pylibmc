@@ -6,9 +6,7 @@ DATABASES = {
     },
 }
 
-INSTALLED_APPS = (
-    'tests',
-)
+INSTALLED_APPS = ('tests',)
 
 CACHES = {
     'default': {
@@ -23,12 +21,8 @@ CACHES = {
     'with_options': {
         'BACKEND': 'dj_pylibmc.memcached.PyLibMCCache',
         'LOCATION': '127.0.0.1:11211',
-        'OPTIONS': {
-            'tcp_nodelay': True,
-            'ketama': True
-        }
+        'OPTIONS': {'tcp_nodelay': True, 'ketama': True},
     },
-
 }
 
 PYLIBMC_MIN_COMPRESS_LEN = 150 * 1024
@@ -53,10 +47,5 @@ LOGGING = {
             'class': 'logging.StreamHandler',
         },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'CRITICAL'
-        }
-    }
+    'loggers': {'django': {'handlers': ['console'], 'level': 'CRITICAL'}},
 }

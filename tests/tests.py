@@ -191,7 +191,7 @@ class PylibmcCacheTests(TestCase):
             'ascii': 'ascii_value',
             'unicode_ascii': 'Iñtërnâtiônàlizætiøn1',
             'Iñtërnâtiônàlizætiøn': 'Iñtërnâtiônàlizætiøn2',
-            'ascii2': {'x': 1}
+            'ascii2': {'x': 1},
         }
         # Test `set`
         for (key, value) in stuff.items():
@@ -214,6 +214,7 @@ class PylibmcCacheTests(TestCase):
     def test_binary_string(self):
         # Binary strings should be cacheable
         from zlib import compress, decompress
+
         value = 'value_to_be_compressed'
         compressed_value = compress(value.encode())
 

@@ -18,12 +18,14 @@ if __name__ == "__main__":
 
     # Log memcache errors to console
     from dj_pylibmc.memcached import log
+
     handler = logging.StreamHandler()
     handler.setLevel(logging.DEBUG)
     log.addHandler(handler)
 
     # Test that the cache is working at all
     from django.core.cache import cache
+
     assert cache
     test_val = 'The test passed'
     assert cache.set('test', test_val), "Could not set cache value"

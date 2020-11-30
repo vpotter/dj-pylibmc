@@ -19,6 +19,7 @@ class Tox(TestCommand):
     def run_tests(self):
         # import here, cause outside the eggs aren't loaded
         import tox
+
         errno = tox.cmdline(self.test_args)
         sys.exit(errno)
 
@@ -31,7 +32,7 @@ def get_long_description(title):
     body_tag = ".. Omit badges from docs"
     readme_body_start = readme.index(body_tag)
     assert readme_body_start
-    readme_body = readme[readme_body_start + len(body_tag):]
+    readme_body = readme[readme_body_start + len(body_tag) :]
 
     changelog = open(os.path.join(ROOT, 'CHANGELOG.rst'), 'r', 'utf8').read()
     old_tag = ".. Omit older changes from package"
@@ -40,7 +41,8 @@ def get_long_description(title):
     changelog_body = changelog[:changelog_body_end]
 
     bars = '=' * len(title)
-    long_description = """
+    long_description = (
+        """
 %(bars)s
 %(title)s
 %(bars)s
@@ -49,7 +51,9 @@ def get_long_description(title):
 %(changelog_body)s
 
 _(Older changes can be found in the full documentation)._
-""" % locals()
+"""
+        % locals()
+    )
     return long_description
 
 
@@ -86,5 +90,5 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Topic :: Software Development :: Libraries :: Python Modules',
-    ]
+    ],
 )
