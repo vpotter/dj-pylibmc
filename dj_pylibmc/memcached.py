@@ -64,7 +64,7 @@ def retry_on_broken_connection(func):
         except MemcachedError as e:
             # libmemcached error code is stored in retcode attribute
             # 3 - ConnectionError
-            if e.retcode == 3:
+            if getattr(e, 'retcode', None) == 3:
                 result = func(*args, **kwargs)
             else:
                 raise
