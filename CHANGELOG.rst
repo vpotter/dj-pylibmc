@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.6.4 - 2020-11-30
+------------------
+- Correctly handles MemcachedError with no retcode attribute
+- Adds black formatiing
+- Supports Python 3.6 through 3.8
+
 0.6.3 - 2020-10-21
 ------------------
 - Makes retry on ConnectionError
