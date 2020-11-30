@@ -50,7 +50,7 @@ Requirements
 ------------
 
 dj-pylibmc requires pylibmc 1.4.1 or above. It supports Django 2.2 through
-3.1, and Python versions >=3.5, <3.9
+3.1, and Python versions >=3.6, <3.9
 
 Installation
 ------------
